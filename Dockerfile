@@ -20,7 +20,6 @@ RUN git clone https://github.com/getgrav/grav.git /usr/share/nginx/html/
 #Install Grav
 WORKDIR /usr/share/nginx/html/
 RUN bin/composer.phar self-update
-RUN bin/grav install
 RUN bin/gpm install admin
 RUN chown www-data:www-data .
 RUN chown -R www-data:www-data *
@@ -80,6 +79,9 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 #Expose configuration and content volumes
 VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
+
+#install grav damin plugin
+RUN bin/grav install
 
 #Public ports
 EXPOSE 80 22
