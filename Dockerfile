@@ -8,8 +8,8 @@ ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 
 #Install core packages
-RUN apt-get update -q
-RUN apt-get upgrade -y -q
+RUN apt-get update 
+RUN apt-get upgrade -y 
 RUN apt-get install -y -q php5 php5-cli php5-fpm php5-gd php5-curl php5-apcu ca-certificates nginx git-core
 RUN apt-get clean -q && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -21,7 +21,7 @@ RUN git clone https://github.com/getgrav/grav.git /usr/share/nginx/html/
 WORKDIR /usr/share/nginx/html/
 RUN bin/composer.phar self-update
 RUN bin/grav install
-RUN bin/grav install admin
+RUN bin/gpm install admin
 RUN chown www-data:www-data .
 RUN chown -R www-data:www-data *
 RUN find . -type f | xargs chmod 664
