@@ -8,7 +8,7 @@ ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 
 #Install core packages
-RUN apt-get update 
+RUN apt-get update -q
 RUN apt-get upgrade -y 
 RUN apt-get install -y -q php5 php5-cli php5-fpm php5-gd php5-curl php5-apcu ca-certificates nginx git-core
 RUN apt-get clean -q && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -20,6 +20,7 @@ RUN git clone https://github.com/getgrav/grav.git /usr/share/nginx/html/
 #Install Grav
 WORKDIR /usr/share/nginx/html/
 RUN bin/composer.phar self-update
+RUN bin/grav install
 RUN chown www-data:www-data .
 RUN chown -R www-data:www-data *
 RUN find . -type f | xargs chmod 664
@@ -79,8 +80,8 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 #Expose configuration and content volumes
 VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
 
-#install grav damin plugin
-RUN bin/grav install
+#install admin plugin
+RUN bin/gpm admin
 
 #Public ports
 EXPOSE 80 22
