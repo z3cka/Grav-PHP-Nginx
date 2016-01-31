@@ -155,8 +155,17 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 #Expose configuration and content volumes
 VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
 
-#install admin plugin
-RUN bin/gpm admin
+#get admin plugin and dependencies
+RUN git clone https://github.com/getgrav/grav-plugin-admin /usr/share/nginx/html/usr/plugins
+RUN git clone https://github.com/getgrav/grav-plugin-login /usr/share/nginx/html/usr/plugins
+RUN git clone https://github.com/getgrav/grav-plugin-email /usr/share/nginx/html/usr/plugins
+RUN git clone https://github.com/getgrav/grav-plugin-form /usr/share/nginx/html/usr/plugins
+
+#change folder names to plugin names
+RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-admin /usr/share/nginx/html/usr/plugins/admin
+RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-login /usr/share/nginx/html/usr/plugins/login
+RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-email /usr/share/nginx/html/usr/plugins/email
+RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-form /usr/share/nginx/html/usr/plugins/form
 
 #Public ports
 EXPOSE 80 22
