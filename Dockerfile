@@ -156,20 +156,20 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
 
 #get admin plugin and dependencies
-RUN git clone https://github.com/getgrav/grav-plugin-admin /usr/share/nginx/html/usr/plugins/grav-plugin-admin/
-RUN git clone https://github.com/getgrav/grav-plugin-login /usr/share/nginx/html/usr/plugins/grav-plugin-login/
-RUN git clone https://github.com/getgrav/grav-plugin-email /usr/share/nginx/html/usr/plugins/grav-plugin-email/
-RUN git clone https://github.com/getgrav/grav-plugin-form /usr/share/nginx/html/usr/plugins/grav-plugin-form
+RUN git clone https://github.com/getgrav/grav-plugin-admin /usr/share/nginx/html/user/plugins/grav-plugin-admin/
+RUN git clone https://github.com/getgrav/grav-plugin-login /usr/share/nginx/html/user/plugins/grav-plugin-login/
+RUN git clone https://github.com/getgrav/grav-plugin-email /usr/share/nginx/html/user/plugins/grav-plugin-email/
+RUN git clone https://github.com/getgrav/grav-plugin-form /usr/share/nginx/html/user/plugins/grav-plugin-form
 
 RUN ls /usr/share/nginx/html/
-RUN ls /usr/share/nginx/html/usr/
-RUN ls /usr/share/nginx/html/usr/plugins/
+RUN ls /usr/share/nginx/html/user/
+RUN ls /usr/share/nginx/html/user/plugins/
 
 #change folder names to plugin names
-RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-admin/ /usr/share/nginx/html/usr/plugins/admin/
-RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-login/ /usr/share/nginx/html/usr/plugins/login/
-RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-email/ /usr/share/nginx/html/usr/plugins/email/
-RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-form/ /usr/share/nginx/html/usr/plugins/form/
+RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-admin/ /usr/share/nginx/html/user/plugins/admin/
+RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-login/ /usr/share/nginx/html/user/plugins/login/
+RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-email/ /usr/share/nginx/html/user/plugins/email/
+RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-form/ /usr/share/nginx/html/user/plugins/form/
 
 #Public ports
 EXPOSE 80 22
