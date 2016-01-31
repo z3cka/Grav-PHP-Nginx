@@ -161,6 +161,10 @@ RUN git clone https://github.com/getgrav/grav-plugin-login /usr/share/nginx/html
 RUN git clone https://github.com/getgrav/grav-plugin-email /usr/share/nginx/html/usr/plugins/grav-plugin-email/
 RUN git clone https://github.com/getgrav/grav-plugin-form /usr/share/nginx/html/usr/plugins/grav-plugin-form
 
+RUN ls /usr/share/nginx/html/
+RUN ls /usr/share/nginx/html/usr/
+RUN ls /usr/share/nginx/html/usr/plugins/
+
 #change folder names to plugin names
 RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-admin/ /usr/share/nginx/html/usr/plugins/admin/
 RUN mv /usr/share/nginx/html/usr/plugins/grav-plugin-login/ /usr/share/nginx/html/usr/plugins/login/
