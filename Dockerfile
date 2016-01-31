@@ -33,6 +33,8 @@ RUN sed -i 's|# gzip_types|  gzip_types|' /etc/nginx/nginx.conf
 
 #Setup Grav configuration for Nginx
 RUN touch /etc/nginx/grav_conf.sh
+RUN touch /usr/share/nginx/html/nginx.conf
+RUN chmod +x /usr/share/nginx/html/nginx.conf
 RUN echo 'worker_processes  1; \n\
 \n\
 	events {\n\
@@ -105,7 +107,7 @@ RUN echo 'worker_processes  1; \n\
 \n\
 	   }\n\
 \n\
-	}\n\' >> /usr/shar/nginx/html/nginx.conf
+	}\n\' >> /usr/share/nginx/html/nginx.conf
 RUN chmod +x /etc/nginx/grav_conf.sh
 RUN echo '#!/bin/bash \n\
     echo "" > /etc/nginx/sites-available/default \n\
