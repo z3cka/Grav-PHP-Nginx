@@ -33,6 +33,79 @@ RUN sed -i 's|# gzip_types|  gzip_types|' /etc/nginx/nginx.conf
 
 #Setup Grav configuration for Nginx
 RUN touch /etc/nginx/grav_conf.sh
+RUN echo 'worker_processes  1; \n\
+\n\
+	events {\n\
+	    worker_connections  1024;\n\
+	}\n\
+\n\
+\n\
+	http {\n\
+	    include       mime.types;\n\
+	    default_type  application/octet-stream;\n\
+	    sendfile        on;\n\
+	    keepalive_timeout  65;\n\
+\n\
+	    server {\n\
+		listen       80;\n\
+		server_name  localhost;\n\
+\n\
+		error_page   500 502 503 504  /50x.html;\n\
+		location = /50x.html {\n\
+		    root   html;\n\
+		}\n\
+\n\
+		location / {\n\
+			root   html;\n\
+			index  index.php;\n\
+			if (!-e $request_filename){ rewrite ^(.*)$ /index.php last; }\n\
+		}\n\
+\n\
+		location /images/ {\n\
+			# Serve images as static\n\
+		}\n\
+\n\
+		location /user {\n\
+			rewrite ^/user/accounts/(.*)$ /error redirect;\n\
+			rewrite ^/user/config/(.*)$ /error redirect;\n\
+			rewrite ^/user/(.*)\.(txt|md|html|php|yaml|json|twig|sh|bat)$ /error redirect;\n\
+		}\n\
+\n\
+		location /cache {\n\
+			rewrite ^/cache/(.*) /error redirect;\n\
+		}\n\
+\n\
+		location /bin {\n\
+			rewrite ^/bin/(.*)$ /error redirect;\n\
+		}\n\
+\n\
+		location /backup {\n\
+		rewrite ^/backup/(.*) /error redirect;\n\
+		}\n\
+\n\
+		location /system {\n\
+			rewrite ^/system/(.*)\.(txt|md|html|php|yaml|json|twig|sh|bat)$ /error redirect;\n\
+		}\n\
+\n\
+		location /vendor {\n\
+			rewrite ^/vendor/(.*)\.(txt|md|html|php|yaml|json|twig|sh|bat)$ /error redirect;\n\
+		}\n\
+\n\
+		# Remember to change 127.0.0.1:9000 to the Ip/port\n\
+		# you configured php-cgi.exe to run from\n\
+\n\
+		location ~ \.php$ {\n\
+		    try_files $uri =404;\n\
+		    fastcgi_split_path_info ^(.+\.php)(/.+)$;\n\
+		    fastcgi_pass   127.0.0.1:9000;\n\
+		    fastcgi_index  index.php;\n\
+		    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;\n\
+		    include        fastcgi_params;\n\
+		}\n\
+\n\
+	   }\n\
+\n\
+	}\n\' >> /usr/shar/nginx/html/nginx.conf
 RUN chmod +x /etc/nginx/grav_conf.sh
 RUN echo '#!/bin/bash \n\
     echo "" > /etc/nginx/sites-available/default \n\
