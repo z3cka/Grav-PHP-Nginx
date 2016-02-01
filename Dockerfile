@@ -152,22 +152,16 @@ RUN sed -i \
 RUN rm -f /etc/service/sshd/down
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
-#Expose configuration and content volumes
-VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
-
 #get admin plugin and dependencies
-RUN git clone https://github.com/getgrav/grav-plugin-admin.git /usr/share/nginx/html/user/plugins/grav-plugin-admin/
-RUN git clone https://github.com/getgrav/grav-plugin-login.git /usr/share/nginx/html/user/plugins/grav-plugin-login/
-RUN git clone https://github.com/getgrav/grav-plugin-email.git /usr/share/nginx/html/user/plugins/grav-plugin-email/
-RUN git clone https://github.com/getgrav/grav-plugin-form.git /usr/share/nginx/html/user/plugins/grav-plugin-form
+RUN git clone https://github.com/getgrav/grav-plugin-admin.git /usr/share/nginx/html/user/plugins/admin/
+RUN git clone https://github.com/getgrav/grav-plugin-login.git /usr/share/nginx/html/user/plugins/login/
+RUN git clone https://github.com/getgrav/grav-plugin-email.git /usr/share/nginx/html/user/plugins/email/
+RUN git clone https://github.com/getgrav/grav-plugin-form.git /usr/share/nginx/html/user/plugins/form
 
 RUN ls /usr/share/nginx/html/user/plugins/
 
-#change folder names to plugin names
-RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-admin/ /usr/share/nginx/html/user/plugins/admin/
-RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-login/ /usr/share/nginx/html/user/plugins/login/
-RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-email/ /usr/share/nginx/html/user/plugins/email/
-RUN mv /usr/share/nginx/html/user/plugins/grav-plugin-form/ /usr/share/nginx/html/user/plugins/form/
+#Expose configuration and content volumes
+VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
 
 #Public ports
 EXPOSE 80 22
