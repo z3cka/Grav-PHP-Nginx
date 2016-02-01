@@ -156,10 +156,10 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
 
 #get admin plugin and dependencies
-RUN git clone https://github.com/getgrav/grav-plugin-admin /usr/share/nginx/html/user/plugins/grav-plugin-admin/
-RUN git clone https://github.com/getgrav/grav-plugin-login /usr/share/nginx/html/user/plugins/grav-plugin-login/
-RUN git clone https://github.com/getgrav/grav-plugin-email /usr/share/nginx/html/user/plugins/grav-plugin-email/
-RUN git clone https://github.com/getgrav/grav-plugin-form /usr/share/nginx/html/user/plugins/grav-plugin-form
+RUN git clone https://github.com/getgrav/grav-plugin-admin.git /usr/share/nginx/html/user/plugins/grav-plugin-admin/
+RUN git clone https://github.com/getgrav/grav-plugin-login.git /usr/share/nginx/html/user/plugins/grav-plugin-login/
+RUN git clone https://github.com/getgrav/grav-plugin-email.git /usr/share/nginx/html/user/plugins/grav-plugin-email/
+RUN git clone https://github.com/getgrav/grav-plugin-form.git /usr/share/nginx/html/user/plugins/grav-plugin-form
 
 RUN ls /usr/share/nginx/html/
 RUN ls /usr/share/nginx/html/user/
