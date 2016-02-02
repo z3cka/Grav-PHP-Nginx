@@ -16,6 +16,7 @@ RUN apt-get clean -q && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 #Get Grav
 RUN rm -fR /usr/share/nginx/html/
 RUN git clone https://github.com/getgrav/grav.git /usr/share/nginx/html/
+WORKDIR /usr/share/nginx/html/
 RUN git fetch
 RUN git checkout remotes/origin/release/1.0.0
 
