@@ -88,8 +88,5 @@ RUN git clone https://github.com/getgrav/grav-plugin-form.git /usr/share/nginx/h
 
 RUN ls /usr/share/nginx/html/user/plugins/
 
-#Expose configuration and content volumes
-VOLUME /root/.ssh/ /etc/nginx/ /usr/share/nginx/html/
-
 #Public ports
 EXPOSE 80 22
